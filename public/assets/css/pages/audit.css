@@ -1,0 +1,21 @@
+.panel-cabadelpa {
+	border-color: #964477;
+}
+
+.title-cabadelpa {
+	background-color: #BA5577 !important;
+	border-color: #964477;
+	border-radius: 5px;
+	color: #fff !important;
+	font-weight: bold;
+}
+
+.no-border {
+	border: none !important;
+}
+
+/* Button */
+
+.btn-cabadelpa {
+	background-color: #EFAD12;
+}

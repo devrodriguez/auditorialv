@@ -1,0 +1,45 @@
+-- Para instalar las dependencias de laravel
+composer install
+
+-- Para levantar un servidor
+php artisan serve
+
+-- Generar key del archivo .env
+php artisan key:generate
+
+-- Generar datos a traves de model factory
+php artisan tinker
+factory(Auditoria\Enterprise::class, 100)->create()
+
+-- Crear la interfaz de autenticacion
+php artisan make:auth
+
+-- Crear controlador (--resource Crea los metodos del controlador), (--model crea el modelo para dicho controlador)
+php artisan make:controller PhotoController --resource --model=Photo
+
+-- Crear modelo. Con -m crea la migracion.
+php artisan make:model nombre_modelo -m
+
+-- Crear una migracion
+php artisan make:migration nombre_migracion --create=nombre_tabla
+
+-- Ejecutar migracion. Crea las tablas nuevamente y ejecuta seeder
+php artisan migrate:refresh --seed
+
+-- Crear seeder. (Un seeder es para poblar una tabla desde laravel [factory()])
+php artisan make:seeder nombre_seeder
+
+CREAR DATOS
+-- Ingresar a tinker
+        php artisan tinker
+-- Crea por pantalla 10 registros sin guardarlos en la BD
+        factory(Auditoria\Enterprise::class, 10)->make()
+-- Para crearlos en la BD
+        factory(Auditoria\Enterprise::class, 10)->create()
+
+
+
+BOOTSTRAP
+Clases para titulo de pagina cool (En una etiqueta h1, h2, ...)
+.text-header
+.text-center

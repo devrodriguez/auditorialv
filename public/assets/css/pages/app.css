@@ -1,0 +1,12 @@
+.btn-cabadelpa-confirm, .btn-cabadelpa-confirm:active {
+	background-color: #efad12;
+	border-color: #f48517;
+}
+	.btn-cabadelpa-confirm:hover, .btn-cabadelpa-confirm:focus, .btn-cabadelpa-confirm:active:focus {
+		background-color: #f48517;
+		border-color: #f48517;		
+	}
+
+.form-horizontal>.form-group {
+    margin-bottom: 0;
+}
