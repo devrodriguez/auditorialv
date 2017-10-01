@@ -1,3 +1,11 @@
+<!-- Usage: 
+  For Local Source: 
+    - Define and set Vuex.$store.state   
+    - Set propertie cpLocal as true
+    - Set propertie cpStoreKey with the key defined in Vuex
+-->
+
+
 <template>
   <div class="Typeahead">
     <i class="fa fa-spinner fa-spin" v-if="loading"></i>
@@ -20,8 +28,8 @@
 
     <ul v-show="hasItems">
       <li v-for="(item, $item) in items" :class="activeClass($item)" @mousedown="hit" @mousemove="setActive($item)">
-        <span class="name" v-text="item.name"></span>
-        <span class="screen-name" v-text="item.screen_name"></span>
+        <span class="name" v-html="FormatSuggestion(item)"></span>
+        <!--<span class="screen-name" v-text="item.screen_name"></span>-->
       </li>
     </ul>
   </div>
@@ -31,12 +39,13 @@
 
 <script>
 import VueTypeahead from 'vue-typeahead'
+import _ from 'lodash'
 
 export default {
   extends: VueTypeahead,
 
   props: {
-  	cpsrc: {
+  	cpSrc: {
   		type: String
   	},
   	placeholder: {
@@ -46,7 +55,7 @@ export default {
   	cpdata: {
   		type: Object
   	},
-  	cplimit: {
+  	cpLimit: {
   		type: Number,
   		default: 5
   	},
@@ -61,38 +70,56 @@ export default {
   	cpqueryparam: {
   		default: 'q'
   	},
-  	cpindex: {
+  	cpIndex: {
   		type: Number
-  	}
+  	},
+    // If the source is locasl as array object
+    // If this value is true should be set this.localSource
+    // p. ej. this.items = [{a:1}]
+    cpLocal: {
+      type: Boolean,
+      default: false
+    },
+    // Data key defined in Vuex.$store.state
+    cpStoreKey: {
+      type: String,
+      default: 'data_'
+    },
+    // String Keys for order
+    cpOrder: {
+      type: Array,
+      default: []
+    }
   },
 
   data () {
     return {
-    	// The source url
-		// (required)
-		src: this.cpsrc,
-		//src: 'https://typeahead-js-twitter-api-proxy.herokuapp.com/demo/search',
+      // The source url
+  		// (required)
+  		src: this.cpSrc,
+  		//src: 'https://typeahead-js-twitter-api-proxy.herokuapp.com/demo/search',
 
-		// The data that would be sent by request
-		// (optional)
-		data: this.cpdata,
+  		// The data that would be sent by request
+  		// (optional)
+  		data: this.cpdata,
 
-		// Limit the number of items which is shown at the list
-      	// (optional)
-		limit: this.cplimit,
+  		// Limit the number of items which is shown at the list
+        	// (optional)
+  		limit: this.cpLimit,
 
-		// The minimum character length needed before triggering
-      	// (optional)
-		minChars: this.cpminchars,
+  		// The minimum character length needed before triggering
+        	// (optional)
+  		minChars: this.cpminchars,
 
-		// Highlight the first item in the list
-		// (optional)
-		selectFirst: this.cpselectfirst,
+  		// Highlight the first item in the list
+  		// (optional)
+  		selectFirst: this.cpselectfirst,
 
-		// Override the default value (`q`) of query parameter name
-		// Use a falsy value for RESTful query
-		// (optional)
-		queryParamName: this.cpqueryparam
+  		// Override the default value (`q`) of query parameter name
+  		// Use a falsy value for RESTful query
+  		// (optional)
+  		queryParamName: this.cpqueryparam,
+
     }
   },
 
@@ -109,11 +136,47 @@ export default {
       return data
     },
     onUpdate (value) {
-    	// Execute default method update
-        this.update();
-        // For use v-model in the component
-        this.$emit('input', value);
+
+      if(this.cpLocal){
+        // If data key exist in Vuex store
+        if(!this.$store.state[this.cpStoreKey]){
+          throw 'Set data source in Vuex.store.state'
+        }
+
+        // Filter data from stored in the store (Vuex)
+        var itemsFiltered = this.$store.state[this.cpStoreKey].filter(itemFilt => {
+          var exp = new RegExp(this.query, 'gi')
+          return exp.test(itemFilt.name);
+        });
+
+        // Order data filtered (Lodash)
+        var itemsOrdered = _.orderBy(itemsFiltered, this.cpOrder);
+
+        // Set data
+        this.localSource = itemsOrdered;
+
+        //if (this.selectFirst) {
+          //this.down()
+        //}
+      }
+
+      // Execute default method update
+      this.update();
+
+      // For use v-model in the component
+      this.$emit('input', value);
+
     },
+    FormatSuggestion(item) {
+      var reg = new RegExp(this.query, 'gi');
+      var replacement = '<b>$&</b>';
+      var replaced = item.name.replace(reg, replacement);
+
+      return replaced;
+    }
+  },
+  mounted () {
+    
   }
 }
 </script>
@@ -202,8 +265,7 @@ span {
 }
 
 .name {
-  font-weight: 700;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .screen-name {
