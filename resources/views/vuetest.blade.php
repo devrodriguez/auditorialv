@@ -18,12 +18,12 @@
 							<typeahead 
 							@@select-item="SelectItem"
 							cp-src="https://typeahead-js-twitter-api-proxy.herokuapp.com/demo/search"
-							:cpindex="index" 
 							placeholder="Type text"
 							v-model="people.alias"
+							:cpindex="index"
 							:cp-local="true"
-							cp-store-key="data"
-							:cp-order="['name']">
+							:cp-order="['name']"
+							cp-store-key="data">
 							</typeahead>
 						</div>
 					</td>
