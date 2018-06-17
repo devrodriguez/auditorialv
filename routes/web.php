@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 	//Auditoria
 	Route::name('audit_path')->get('/audit/{enterprise}', 'AuditController@index');
+	Route::name('audit_checklist')->post('/audit/{enterprise}', 'AuditController@valid');
 
 	//Item auditoria
 	Route::name('item_path')->get('/item', 'ItemAuditController@index');

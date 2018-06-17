@@ -45,16 +45,29 @@
 	<div id="mdValid" class="modal fade" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
+			<form action="{{route('audit_checklist', ['enterprise' => $enterprise])}}" method="POST" enctype="multipart/form-data">
+				{{ csrf_field() }}
 				<div class="modal-header">
 					<h4 class="modal-title">Validar Procedimiento</h4>
 				</div>
 				<div class="modal-body">
-					Valida el procedimiento de auditoria...
+					<div class="form-group">
+						<label for="comment">Evidencia escrita</label>
+						<textarea name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="archivo">Archivo</label>
+						<input type="file" name="archivo" id="archivo" class="form-control">
+					</div>					
 				</div>
 				<div class="modal-footer">
 			    	<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-			        <button type="button" class="btn btn-primary btn-cabadelpa-confirm">Guardar</button>
+					<button type="submit" class="btn btn-success btn-cabadelpa-confirm">
+						<i class="fa fa-save" aria-hidden="true"></i>
+						Guardar
+					</button>
 			    </div>
+				</form>
 			</div>
 		</div>
 	</div>
