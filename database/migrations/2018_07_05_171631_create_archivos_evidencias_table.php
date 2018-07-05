@@ -15,9 +15,12 @@ class CreateArchivosEvidenciasTable extends Migration
     {
         Schema::create('archivos_evidencias', function (Blueprint $table) {
             $table->increments('id_archivos_evidencia');
-            $table->integer('id_auditoria_empresa_items');
+            $table->unsignedInteger('id_auditoria_empresa_evidencia');
             $table->string('url_archivo', 255);
             $table->timestamps();
+
+            // Foreign keys
+            $table->foreign('id_auditoria_empresa_evidencia')->references('id_auditoria_empresa_evidencia')->on('auditoria_empresa_evidencias');
         });
     }
 

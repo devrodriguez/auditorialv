@@ -15,10 +15,14 @@ class CreateAuditoriaEmpresasTable extends Migration
     {
         Schema::create('auditoria_empresas', function (Blueprint $table) {
             $table->increments('id_auditoria_empresas');
-            $table->integer('id_empresa');
-            $table->integer('id_auditor');
+            $table->unsignedInteger('id_empresa');
+            $table->unsignedInteger('id_auditor');
             $table->dateTime('fecha_auditoria');
             $table->timestamps();
+
+            // Foreign keys
+            $table->foreign('id_empresa')->references('id')->on('enterprises');
+            $table->foreign('id_auditor')->references('id')->on('auditors');
         });
     }
 

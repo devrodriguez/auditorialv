@@ -90,7 +90,6 @@ class ItemAuditController extends Controller
      */
     public function delete(ItemAudit $itemAudit)
     {
-        //$itemAudit = ItemAudit::find($idItemAudit);
         $itemAudit->delete();
 
         session()->flash('message', 'Item eliminado');

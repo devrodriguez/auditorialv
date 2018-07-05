@@ -18,7 +18,8 @@ class CreateAuditorTable extends Migration
             $table->string('name');
             $table->string('role');
             $table->timestamps();
-        });    }
+        });    
+    }
 
     /**
      * Reverse the migrations.
