@@ -14,11 +14,11 @@ class CreateEnterpriseTable extends Migration
     public function up()
     {
         Schema::create('enterprises', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nit');
-            $table->string('nombre');
-            $table->string('descripcion');
-            $table->string('direccion');
+            $table->increments('enterprise_id');
+            $table->string('identification');
+            $table->string('name');
+            $table->string('phone_number')->nullable();
+            $table->string('address')->nullable();
             $table->integer('user_id')->unsigned();
             $table->timestamps(); //crated_ad, updated_ad
         });

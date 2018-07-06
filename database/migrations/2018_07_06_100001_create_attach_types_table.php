@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAuditorTable extends Migration
+class CreateAttachTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateAuditorTable extends Migration
      */
     public function up()
     {
-        Schema::create('auditors', function (Blueprint $table) {
-            $table->increments('auditor_id');
-            $table->string('name');
-            $table->string('role');
+        Schema::create('attach_types', function (Blueprint $table) {
+            $table->increments('attach_type_id');
+            $table->string('type', 250);
             $table->timestamps();
-        });    
+        });
     }
 
     /**
@@ -28,6 +27,6 @@ class CreateAuditorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('auditors');
+        Schema::dropIfExists('attach_types');
     }
 }

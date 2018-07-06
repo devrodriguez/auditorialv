@@ -18,7 +18,8 @@ php artisan make:auth
 php artisan make:controller PhotoController --resource --model=Photo
 
 -- Crear modelo. Con -m crea la migracion.
-php artisan make:model nombre_modelo -m
+* El nombre del modelo debe ser singular y en ingles
+php artisan make:model ModelName -m
 
 -- Crear una migracion
 php artisan make:migration nombre_migracion --create=nombre_tabla
@@ -36,6 +37,10 @@ CREAR DATOS
         factory(Auditoria\Enterprise::class, 10)->make()
 -- Para crearlos en la BD
         factory(Auditoria\Enterprise::class, 10)->create()
+
+ELIMINAR MIGRACION
+1. Eliminar archivos de database/migrations/
+2. Ejecutar composer dump-autoload
 
 
 

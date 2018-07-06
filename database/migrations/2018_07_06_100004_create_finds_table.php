@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAuditorTable extends Migration
+class CreateFindsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateAuditorTable extends Migration
      */
     public function up()
     {
-        Schema::create('auditors', function (Blueprint $table) {
-            $table->increments('auditor_id');
-            $table->string('name');
-            $table->string('role');
+        Schema::create('finds', function (Blueprint $table) {
+            $table->increments('find_id');
+            $table->string('description', 500);
+            $table->unsignedInteger('evidence_id');
             $table->timestamps();
-        });    
+
+            $table->foreign('evidence_id')->references('evidence_id')->on('evidences');
+        });
     }
 
     /**
@@ -28,6 +30,6 @@ class CreateAuditorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('auditors');
+        Schema::dropIfExists('finds');
     }
 }
