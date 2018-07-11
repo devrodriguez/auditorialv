@@ -24,7 +24,7 @@ class CreateAuditsTable extends Migration
 
             // Foreign
             $table->foreign('enterprise_id')->references('enterprise_id')->on('enterprises');
-            $table->foreign('criteria_id')->references('criteria_id')->on('criterias');
+            $table->foreign('audit_criteria_id')->references('criteria_id')->on('criterias');
             $table->foreign('auditor_id')->references('auditor_id')->on('auditors');
         });
     }

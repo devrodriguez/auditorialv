@@ -34,10 +34,16 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::name('audit_checklist')->post('/audit/{enterprise}', 'AuditController@valid');
 
 	//Item auditoria
-	Route::name('item_path')->get('/item', 'ItemAuditController@index');
+	/*Route::name('item_path')->get('/item', 'ItemAuditController@index');
 	Route::name('store_item_path')->post('/item/create', 'ItemAuditController@store');
 	Route::name('delete_item_path')->delete('/item/{itemAudit}', 'ItemAuditController@delete');
-	Route::name('edit_item_path')->get('/item/{item}/edit', 'ItemAuditController@edit');
+	Route::name('edit_item_path')->get('/item/{item}/edit', 'ItemAuditController@edit');*/
+
+	// Criteria
+	Route::name('show_criteria')->get('/show', 'CriteriaController@index');
+	Route::name('create_criteria')->post('/criteria/create', 'CriteriaController@store');
+	Route::name('delete_criteria')->delete('/criteria/{criteria}', 'CriteriaController@destroy');
+	Route::name('edit_criteria')->get('/criteria/{item}/edit', 'CriteriaController@edit');
 
 	//Auditor
 	Route::name('auditor_path')->get('auditor', 'AuditorController@index');

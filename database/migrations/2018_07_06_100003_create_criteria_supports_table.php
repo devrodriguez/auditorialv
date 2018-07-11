@@ -17,7 +17,6 @@ class CreateCriteriaSupportsTable extends Migration
             $table->increments('criteria_support_id');
             $table->string('content', 1000);
             $table->unsignedInteger('attach_type_id');
-            $table->unsignedInteger('find_id');
             $table->timestamps();
 
             // Foreign

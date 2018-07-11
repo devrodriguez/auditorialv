@@ -73,10 +73,10 @@
                                         <a href="{{ route('create_entp_path') }}">Crear Cliente</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('item_path') }}">Crear Procedimiento</a>
+                                        <a href="{{ route('auditor_path') }}">Crear Auditor</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('auditor_path') }}">Crear Auditor</a>
+                                        <a href="{{ route('show_criteria') }}">Crear Criterio</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('logout') }}"

@@ -23,7 +23,6 @@ class CreateCriteriasTable extends Migration
 
             // Foreign
             $table->foreign('criteria_support_id')->references('criteria_support_id')->on('criteria_supports');
-            $table->foreign('find_id')->references('find_id')->on('finds');
         });
     }
 
