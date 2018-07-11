@@ -14,7 +14,7 @@ class CreateAttachTypesTable extends Migration
     public function up()
     {
         Schema::create('attach_types', function (Blueprint $table) {
-            $table->increments('attach_type_id');
+            $table->increments('id');
             $table->string('type', 250);
             $table->timestamps();
         });

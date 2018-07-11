@@ -11,20 +11,20 @@
 	{{ csrf_field() }}
 	<div class="form-group">
 		<label for="nit">NIT</label>
-		<input type="text" name="nit" class="form-control" value="{{ $enterprise->nit or old('nit') }}">
+		<input type="text" name="nit" class="form-control" value="{{ $enterprise->identification or old('identification') }}">
 	</div>
 	<div class="form-group">
 		<label for="nombre">Nombre</label>
-		<input type="text" name="nombre" class="form-control" value="{{ $enterprise->nombre or old('nombre') }}">
+		<input type="text" name="nombre" class="form-control" value="{{ $enterprise->name or old('name') }}">
 	</div>
 	<div class="form-group">
 		<label for="nit">Direccion</label>
-		<input type="text" name="direccion" class="form-control" value="{{ $enterprise->direccion or old('direccion') }}">
+		<input type="text" name="direccion" class="form-control" value="{{ $enterprise->address or old('address') }}">
 	</div>
 	<div class="form-group">
-		<label for="descripcion">Descripcion</label>
-		<textarea name="descripcion" class="form-control" rows="3">{{ $enterprise->descripcion or old('descripcion') }}</textarea>
+		<label for="nit">Telefono</label>
+		<input type="text" name="telefono" class="form-control" value="{{ $enterprise->phone_number or old('phone_number') }}">
 	</div>
-
+	
 	<button type="submit" class="btn btn-success btn-cabadelpa-confirm">Guardar</button>
 </form>

@@ -20,9 +20,9 @@ class CreateAuditCriteriaTable extends Migration
             $table->unsignedInteger('find_id');
 
             // Foreign
-            $table->foreign('audit_id')->references('audit_id')->on('audits');
-            $table->foreign('criteria_id')->references('criteria_id')->on('criterias');
-            //$table->foreign('find_id')->references('find_id')->on('finds');
+            $table->foreign('audit_id')->references('id')->on('audits');
+            $table->foreign('criteria_id')->references('id')->on('criterias');
+            $table->foreign('find_id')->references('id')->on('finds');
         });
     }
 

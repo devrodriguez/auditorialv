@@ -11,7 +11,7 @@ use Auditoria\Http\Requests\EditEnterpriseRequest;
 class EnterpriseController extends Controller
 {
     public function index() {
-    	$enterprises = Enterprise::orderBy('nombre', 'asc')->paginate(10);
+    	$enterprises = Enterprise::orderBy('name', 'asc')->paginate(10);
 
     	return view('enterprise/index')->with(['enterprises' =>  $enterprises]);
     }
@@ -29,11 +29,12 @@ class EnterpriseController extends Controller
 
     public function store(CreateEnterpriseRequest $request) {
         $enterprise = new Enterprise;
-        $enterprise->nit = $request->get('nit');
-        $enterprise->nombre = $request->get('nombre');
-        $enterprise->direccion = $request->get('direccion');
-        $enterprise->descripcion = $request->get('descripcion');
+        $enterprise->identification = $request->get('nit');
+        $enterprise->name = $request->get('nombre');
+        $enterprise->address = $request->get('direccion');        
+        $enterprise->phone_number = $request->get('telefono');
         $enterprise->user_id = auth()->user()->id;
+        
         $enterprise->save();
 
         session()->flash('message', 'Empresa creada');
@@ -52,10 +53,11 @@ class EnterpriseController extends Controller
     }
 
     public function update(Enterprise $enterprise, EditEnterpriseRequest $request) {
-        $enterprise->nit = $request->get('nit');
-        $enterprise->nombre = $request->get('nombre');
-        $enterprise->direccion = $request->get('direccion');
-        $enterprise->descripcion = $request->get('descripcion');
+        $enterprise->identification = $request->get('nit');
+        $enterprise->name = $request->get('nombre');
+        $enterprise->address = $request->get('direccion');
+        $enterprise->phone_number = $request->get('telefono');
+
         $enterprise->save();
 
         session()->flash('message', 'Empresa actualizada');
@@ -82,7 +84,7 @@ class EnterpriseController extends Controller
 
     public function find(Request $request) {
         $search = $request->get('search');
-        $enterprises = Enterprise::where('nombre', 'LIKE', '%'.$search.'%')->paginate(10);
+        $enterprises = Enterprise::where('name', 'LIKE', '%'.$search.'%')->paginate(10);
         return view('enterprise/index')->with(['enterprises' => $enterprises]);
     }
 }

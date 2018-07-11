@@ -14,7 +14,7 @@ class CreateAuditorTable extends Migration
     public function up()
     {
         Schema::create('auditors', function (Blueprint $table) {
-            $table->increments('auditor_id');
+            $table->increments('id');
             $table->string('name');
             $table->string('role');
             $table->timestamps();

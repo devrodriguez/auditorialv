@@ -14,13 +14,15 @@ class CreateCriteriaSupportsTable extends Migration
     public function up()
     {
         Schema::create('criteria_supports', function (Blueprint $table) {
-            $table->increments('criteria_support_id');
+            $table->increments('id');
             $table->string('content', 1000);
             $table->unsignedInteger('attach_type_id');
+            $table->unsignedInteger('criteria_id');
             $table->timestamps();
 
             // Foreign
-            $table->foreign('attach_type_id')->references('attach_type_id')->on('attach_types');
+            $table->foreign('attach_type_id')->references('id')->on('attach_types');
+            $table->foreign('criteria_id')->references('id')->on('criterias');
         });
     }
 

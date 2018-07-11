@@ -14,12 +14,12 @@ class CreateFindsTable extends Migration
     public function up()
     {
         Schema::create('finds', function (Blueprint $table) {
-            $table->increments('find_id');
+            $table->increments('id');
             $table->string('description', 500);
             $table->unsignedInteger('evidence_id');
             $table->timestamps();
 
-            $table->foreign('evidence_id')->references('evidence_id')->on('evidences');
+            $table->foreign('evidence_id')->references('id')->on('evidences');
         });
     }
 

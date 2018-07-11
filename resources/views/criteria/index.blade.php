@@ -54,8 +54,8 @@
                 </li>
             </ul>
         </div>
-		<p>{{ $itemAudit->name }}</p>
-		<small>{{ $itemAudit->description }}</footer>				
+		<p>{{ $criteria->name }}</p>
+		<small>{{ $criteria->description }}</footer>				
 	</blockquote>
 	@endforeach
 @endsection
