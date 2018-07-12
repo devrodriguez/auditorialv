@@ -32,32 +32,13 @@
 				<img src="{{ url('assets/images/avatar-test.png') }}" class="img-circle" style="height: 100px;" />
 			</div>
 			<div class="col-sm-10">
-				<div class="pull-right" role="navigation">
-		            <ul class="nav">
-		                <li>
-		                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-		                        <i class="fa fa-bars"></i>
-		                    </a>
-		                    <ul class="dropdown-menu dropdown-menu-right">
-		                        <!--<li>
-		                            <a href="" >
-		                            	<i class="fa fa-edit"></i>
-		                            	Editar
-		                            </a>
-		                        </li>-->
-		                        <li>
-		                            <a href="#" onclick="ValidateDelete({{ $auditor->id }});">
-			                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-			                            Eliminar
-		                            </a>
-		                            <form id="formDelete{{ $auditor->id }}" action="{{ route('delete_auditor_path', ['auditor' => $auditor->id]) }}" method="POST">
-		                                {{ csrf_field() }}
-		                                {{ method_field('DELETE') }}
-		                            </form>
-		                        </li>
-		                    </ul>
-		                </li>
-		            </ul>
+				<div class="pull-right">
+					{!! Form::open(['route' => ['delete_auditor', $auditor->id], 'method' => 'DELETE']) !!}
+						<button class="btn btn-sm btn-danger">
+							<i class="fa fa-trash-o" aria-hidden="true"></i>
+							Eliminar
+						</button>
+					{!! Form::close() !!}
 	            </div>
 				<h3>{{ $auditor->name }}</h3>
 				<small>{{ $auditor->role }}</small>

@@ -67,16 +67,19 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ route('entps_path') }}">Ver Clientes</a>
+                                        <a href="{{ route('index_enterprise') }}">Ver Empresas</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('create_entp_path') }}">Crear Cliente</a>
+                                        <a href="{{ route('create_enterprise') }}">Crear Empresa</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('auditor_path') }}">Crear Auditor</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('show_criteria') }}">Crear Criterio</a>
+                                        <a href="{{ route('criteria.index') }}">Ver Criterios</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('criteria.create') }}">Crear Criterio</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('logout') }}"

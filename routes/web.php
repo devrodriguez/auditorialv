@@ -20,35 +20,32 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/home', 'HomeController@index');
 
 	// Empresa
-	Route::name('entps_path')->get('/enterprise', 'EnterpriseController@index');
-	Route::name('create_entp_path')->get('/enterprise/create', 'EnterpriseController@create');
-	Route::name('store_entp_path')->post('/enterprise', 'EnterpriseController@store');
-	Route::name('find_entp_path')->get('/enterprise/find', 'EnterpriseController@find');
-	Route::name('entp_path')->get('/enterprise/{enterprise}', 'EnterpriseController@show');
-	Route::name('edit_entp_path')->get('/enterprise/{enterprise}/edit', 'EnterpriseController@edit');
-	Route::name('update_entp_path')->put('/enterprise/{enterprise}', 'EnterpriseController@update');
-	Route::name('delete_entp_path')->delete('/enterprise/{enterprise}', 'EnterpriseController@delete');
+	Route::name('index_enterprise')->get('/enterprise', 'EnterpriseController@index');
+	Route::name('create_enterprise')->get('/enterprise/create', 'EnterpriseController@create');
+	Route::name('store_enterprise')->post('/enterprise', 'EnterpriseController@store');
+	Route::name('find_enterprise')->get('/enterprise/find', 'EnterpriseController@find');
+	Route::name('show_enterprise')->get('/enterprise/{enterprise}', 'EnterpriseController@show');
+	Route::name('edit_enterprise')->get('/enterprise/{enterprise}/edit', 'EnterpriseController@edit');
+	Route::name('update_enterprise')->put('/enterprise/{enterprise}', 'EnterpriseController@update');
+	Route::name('delete_enterprise')->delete('/enterprise/{enterprise}/delete', 'EnterpriseController@delete');
 
 	//Auditoria
-	Route::name('audit_path')->get('/audit/{enterprise}', 'AuditController@index');
+	Route::name('index_audit')->get('/audit/{enterprise}', 'AuditController@index');
 	Route::name('audit_checklist')->post('/audit/{enterprise}', 'AuditController@valid');
 
-	//Item auditoria
-	/*Route::name('item_path')->get('/item', 'ItemAuditController@index');
-	Route::name('store_item_path')->post('/item/create', 'ItemAuditController@store');
-	Route::name('delete_item_path')->delete('/item/{itemAudit}', 'ItemAuditController@delete');
-	Route::name('edit_item_path')->get('/item/{item}/edit', 'ItemAuditController@edit');*/
-
 	// Criteria
-	Route::name('show_criteria')->get('/show', 'CriteriaController@index');
-	Route::name('create_criteria')->post('/criteria/create', 'CriteriaController@store');
-	Route::name('delete_criteria')->delete('/criteria/{criteria}', 'CriteriaController@destroy');
-	Route::name('edit_criteria')->get('/criteria/{item}/edit', 'CriteriaController@edit');
+	/*Route::name('index_criteria')->get('/show', 'CriteriaController@index');
+	Route::name('create_criteria')->post('/criteria/create', 'CriteriaController@create');
+	Route::name('store_criteria')->post('/criteria/store', 'CriteriaController@store');
+	Route::name('delete_criteria')->delete('/criteria/{criteria}/delete', 'CriteriaController@destroy');
+	Route::name('edit_criteria')->get('/criteria/{item}/edit', 'CriteriaController@edit');*/
+
+	Route::resource('criteria', 'CriteriaController');
 
 	//Auditor
 	Route::name('auditor_path')->get('auditor', 'AuditorController@index');
 	Route::name('store_auditor_path')->post('auditor/store', 'AuditorController@store');
-	Route::name('delete_auditor_path')->delete('auditor/{auditor}/delete', 'AuditorController@destroy');
+	Route::name('delete_auditor')->delete('auditor/{auditor}/delete', 'AuditorController@destroy');
 });
 
 // Rutas que no necesitan login para ser accedidas

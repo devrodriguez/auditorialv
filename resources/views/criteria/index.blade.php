@@ -5,54 +5,16 @@
 @endsection
 
 @section('content')
-	<!-- Formulario -->
-	<header>
-		<form action="{{ route('create_criteria') }}" method="POST">
-			<!-- Genera un token de autentificacion requerido por laravel -->
-			{{ csrf_field() }}
-			<div class="form-group">
-                <label for="name">Nombre</label>
-                <input type="text" name="name" class="form-control">
-			</div>
-			<div class="form-group">
-				<label for="description">Descripcion</label>
-				<textarea name="description" class="form-control" rows="2"></textarea>
-			</div>
-			<button type="submit" class="btn btn-success btn-cabadelpa-confirm">
-				<i class="fa fa-save" aria-hidden="true"></i>
-				Guardar
-			</button>
-		</form>
-	</header>
-	<hr>
 	@foreach($criterias as $criteria)
 	<blockquote>
-		<div class="pull-right" role="navigation">
-            <ul class="nav">
-                <li>
-                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <i class="fa fa-bars"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <!--<li>
-	                        <a href="" >
-	                        	<i class="fa fa-edit"></i>
-	                        	Editar
-	                        </a>
-	                    </li>-->
-                        <li>
-                            <a href="#" onclick="ValidateDelete({{ $criteria->criteria_id }});">
-	                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-	                            Eliminar
-                            </a>
-                            <form id="formDelete{{ $criteria->criteria_id }}" action="{{ route('delete_criteria', ['criteria' => $criteria->criteria_id]) }}" method="POST">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+		<div class="pull-right">
+			<a href="{{ route('criteria.edit', $criteria->id) }}" class="btn btn-sm btn-primary">Editar</a>
+			{!! Form::open(['route' => ['criteria.destroy', $criteria->id], 'method' => 'DELETE']) !!}
+				<button class="btn btn-sm btn-danger">
+					<i class="fa fa-trash-o" aria-hidden="true"></i>
+					Eliminar
+				</button>
+			{!! Form::close() !!}
         </div>
 		<p>{{ $criteria->name }}</p>
 		<small>{{ $criteria->description }}</footer>				
@@ -61,5 +23,5 @@
 @endsection
 
 @section('scripts')
-	{!! Html::script('assets/js/pages/itemAudit.js') !!}
+	
 @endsection

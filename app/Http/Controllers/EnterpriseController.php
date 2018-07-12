@@ -17,9 +17,7 @@ class EnterpriseController extends Controller
     }
 
     public function show(Enterprise $enterprise) {
-        //$enterprise_ = Enterprise::find($enterprise->id);
         return view('enterprise/show')->with(['enterprise' => $enterprise]);
-        //return dd($enterprise);
     }
 
     public function create() {
@@ -39,14 +37,14 @@ class EnterpriseController extends Controller
 
         session()->flash('message', 'Empresa creada');
 
-        return redirect()->route('entps_path');
+        return redirect()->route('index_enterprise');
     }
 
     public function edit(Enterprise $enterprise) {
         // Valida si el usuario tiene permiso para eliminar
         if ($enterprise->user_id != \Auth::user()->id) {
             session()->flash('message', 'No tiene autorizacion para editar esta empresa');
-            return redirect()->route('entps_path');
+            return redirect()->route('index_enterprise');
         }
 
         return view('enterprise/edit')->with(['enterprise' => $enterprise]);
@@ -62,7 +60,7 @@ class EnterpriseController extends Controller
 
         session()->flash('message', 'Empresa actualizada');
 
-        return redirect()->route('entp_path', ['enterprise' => $enterprise->id]); 
+        return redirect()->route('show_enterprise', ['enterprise' => $enterprise->id]); 
 
         // Otra opcion
         /*$post->update(
@@ -74,12 +72,12 @@ class EnterpriseController extends Controller
         // Valida si el usuario tiene permiso para eliminar
         if ($enterprise->user_id != \Auth::user()->id) {
             session()->flash('message', 'No tiene autorizacion para eliminar esta empresa');
-            return redirect()->route('entps_path');
+            return redirect()->route('index_enterprise');
         }
 
         $enterprise->delete();
         session()->flash('message', 'Empresa eliminada');
-        return redirect()->route('entps_path');
+        return redirect()->route('index_enterprise');
     }
 
     public function find(Request $request) {

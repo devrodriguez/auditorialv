@@ -6,7 +6,7 @@
 
 @section('content')
     <header>
-        <form method="GET" action="{{ route('find_entp_path') }}" id="formSearch">
+        <form method="GET" action="{{ route('find_enterprise') }}" id="formSearch">
             <div class="input-group">
                 <label for="inpEmpresa" class="input-group-addon"></label>
                 <input id="search" name="search" type="text" class="form-control" placeholder="Digite el nit o nombre de empresa">
@@ -20,76 +20,39 @@
     @foreach($enterprises as $enterprise)
     <div class="panel panel-default">
         <div class="panel-heading">
-            
-            @if(Auth::user() != null)
-                @if($enterprise->user_id == Auth::user()->id)
-                <div class="pull-right">
-                    <form action="{{ route('audit_path', ['enterprise' => $enterprise]) }}" method="GET">
-                        <button type="submit" class="btn btn-primary">
-                            Auditoria
-                        </button>
-                    </form>
-                </div>
-                @endif
-            @endif
-            <div class="pull-right" role="navigation">
-                <ul class="nav">
-                    <li>
-                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                            <i class="fa fa-bars"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
-                                <a href="{{ route('edit_entp_path', ['entp' => $enterprise->id]) }}" >
-                                    <i class="fa fa-edit"></i>
-                                    Editar
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onclick="ValidateDelete();">
-                                    <i class="fa fa-trash-o"></i>
-                                    Eliminar
-                                </a>
-                                <form name="formDelete" id="formDelete" action="{{ route('delete_entp_path', ['entp' => $enterprise->id]) }}" method="POST">
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+            <h4>{{ $enterprise->name }}</h4>
+            <span>
+                <small>{{ $enterprise->identification }}</small>            
+            </span>
+            <div class="pull-right">
+                <a href="{{ route('edit_enterprise', $enterprise->id) }}" class="btn btn-sm btn-primary">Editar</a>
+                {!! Form::open(['route' => ['delete_enterprise', $enterprise->id], 'method' => 'DELETE']) !!}
+                    <button class="btn btn-sm btn-danger">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        Eliminar
+                    </button>
+                {!! Form::close() !!}
             </div>
-            <h4>{{ $enterprise->nombre }} - {{ $enterprise->nit }}</h4>
-            
         </div>
         <div class="panel-body">
             <form class="form-horizontal">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Direccion</label>
+                    <label class="col-sm-2 control-label">Direccion:</label>
                     <div class="col-sm-10">
                         <p class="form-control-static">
-                            {{ $enterprise->direccion }}
+                            {{ $enterprise->address }}
                         </p>
                     </div> 
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Actividad</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static">
-                            {{ $enterprise->descripcion }}
-                        </p>
-                    </div> 
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Ultima auditoria</label>
+                    <label class="col-sm-2 control-label">Ultima auditoria:</label>
                     <div class="col-sm-10">
                         <p class="form-control-static">
                             {{ $enterprise->updated_at->diffForHumans() }}
                         </p>
                     </div> 
                 </div>
-            </form>
-            
+            </form>            
         </div>
     </div>
     @endforeach

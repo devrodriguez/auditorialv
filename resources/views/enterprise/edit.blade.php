@@ -2,6 +2,6 @@
 
 @section('content')
 
-	@include('layouts/_form', ['enterprise' => $enterprise])
+	@include('enterprise/partials/form', ['enterprise' => $enterprise])
 
 @endsection

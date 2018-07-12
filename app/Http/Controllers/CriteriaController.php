@@ -16,7 +16,7 @@ class CriteriaController extends Controller
     public function index()
     {
         $criterias = Criteria::all();
-        return view('criteria/index', ['criterias' => $criterias]);
+        return view('criteria.index', ['criterias' => $criterias]);
     }
 
     /**
@@ -24,9 +24,8 @@ class CriteriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('criteria.create');
     }
 
     /**
@@ -44,7 +43,7 @@ class CriteriaController extends Controller
         $criteria->save();
 
         session()->flash('message', 'Criterio creado');
-        return redirect()->route('show_criteria');
+        return redirect()->route('criteria.index');
     }
 
     /**
@@ -66,7 +65,9 @@ class CriteriaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $criteria = Criteria::find($id);
+
+        return view('criteria.edit', compact('criteria'));
     }
 
     /**
@@ -78,7 +79,14 @@ class CriteriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $criteria = Criteria::find($id);
+        $criteria->name = $request->get('name');
+        $criteria->description = $request->get('description');
+        $criteria->save();
+
+        session()->flash('message', 'Criterio actualizado');
+
+        return redirect()->route('criteria.index');
     }
 
     /**
@@ -87,10 +95,11 @@ class CriteriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Criteria $criteria)
+    public function destroy($id)
     {
-        $criteria->delete();
+        $criteria = Criteria::find($id)->delete();
 
         session()->flash('message', 'Criterio eliminado');
+        return back();
     }
 }

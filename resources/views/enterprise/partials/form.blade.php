@@ -1,10 +1,10 @@
 
 @if($enterprise->exists)
-	<form action="{{ route('update_entp_path', ['enterprise' => $enterprise->id]) }}" method="POST">
+	<form action="{{ route('update_enterprise', ['enterprise' => $enterprise->id]) }}" method="POST">
 		<!-- Permite hacer peticiones PUT -->
 		{{ method_field('PUT') }}
 @else
-	<form action="{{ route('store_entp_path') }}" method="POST">
+	<form action="{{ route('store_enterprise') }}" method="POST">
 @endif
 	
 	<!-- Genera un token de autentificacion requerido por laravel -->
