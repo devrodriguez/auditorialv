@@ -20,37 +20,46 @@
     @foreach($enterprises as $enterprise)
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4>{{ $enterprise->name }}</h4>
-            <span>
-                <small>{{ $enterprise->identification }}</small>            
-            </span>
-            <div class="pull-right">
-                <a href="{{ route('edit_enterprise', $enterprise->id) }}" class="btn btn-sm btn-primary">Editar</a>
-                {!! Form::open(['route' => ['delete_enterprise', $enterprise->id], 'method' => 'DELETE']) !!}
-                    <button class="btn btn-sm btn-danger">
-                        <i class="fa fa-trash-o" aria-hidden="true"></i>
-                        Eliminar
-                    </button>
-                {!! Form::close() !!}
+            <div class="row">
+                <div class="col-sm-8">
+                    <h4>{{ $enterprise->name }}</h4>
+                    <span>
+                        <small>{{ $enterprise->identification }}</small>            
+                    </span>
+                </div>
+                <div class="col-sm-4">
+                    <div class="button-group pull-right">
+                    @if(Auth::user() != null)
+                        @if($enterprise->user_id == Auth::user()->id)
+                        <a href="{{ route('edit_enterprise', $enterprise->id) }}" class="btn btn-xs btn-primary btn-block">
+                            <i class="fa fa-pencil"></i>
+                            Editar
+                        </a>
+                        {!! Form::open(['route' => ['delete_enterprise', $enterprise->id], 'method' => 'DELETE']) !!}
+                        <button class="btn btn-xs btn-danger btn-block">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            Eliminar
+                        </button>
+                        {!! Form::close() !!}
+                        @endif
+                    @endif
+                    </div>
+                </div>
             </div>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal">
+            <form action="" class="form-horizontal">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Direccion:</label>
+                    <label class="col-sm-2 control-label">Direccion</label>
                     <div class="col-sm-10">
-                        <p class="form-control-static">
-                            {{ $enterprise->address }}
-                        </p>
-                    </div> 
+                        <p class="form-control-static">{{ $enterprise->address }}</p>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Ultima auditoria:</label>
+                    <label class="col-sm-2 control-label">Ultima auditoria</label>
                     <div class="col-sm-10">
-                        <p class="form-control-static">
-                            {{ $enterprise->updated_at->diffForHumans() }}
-                        </p>
-                    </div> 
+                        <p class="form-control-static">{{ $enterprise->updated_at->diffForHumans() }}</p>
+                    </div>
                 </div>
             </form>            
         </div>

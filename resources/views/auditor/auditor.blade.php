@@ -34,7 +34,7 @@
 			<div class="col-sm-10">
 				<div class="pull-right">
 					{!! Form::open(['route' => ['delete_auditor', $auditor->id], 'method' => 'DELETE']) !!}
-						<button class="btn btn-sm btn-danger">
+						<button class="btn btn-xs btn-danger">
 							<i class="fa fa-trash-o" aria-hidden="true"></i>
 							Eliminar
 						</button>

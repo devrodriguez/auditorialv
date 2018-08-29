@@ -11,18 +11,26 @@
                 <!--<p>{{ $enterprise->descripcion }}</p>-->
             </div>
             <div class="panel-body">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <span class="feature-list-item"><strong>Direccion:&nbsp;</strong></span>
-                        {{ $enterprise->address }}
-                    </li>
-                    <li class="list-group-item"><strong class="feature-list-item">
-                        Ultima auditoria:&nbsp;</strong>{{ $enterprise->updated_at->diffForHumans() }}
-                    </li>
-                    <li class="list-group-item"><strong class="feature-list-item">
-                        Auditor:&nbsp;</strong>
-                    </li>
-                </ul>
+                <form action="" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Direccion</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">{{ $enterprise->address }}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Ultima auditoria</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">{{ $enterprise->updated_at->diffForHumans() }}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Ultima auditoria</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">[Auditor Name]</p>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 	</div>
