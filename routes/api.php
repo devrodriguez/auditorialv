@@ -23,7 +23,8 @@ Route::group(['middleware' => ['auth:api']], function(){
 		$user = Auth::user();
 		return $user;
 	});
-
-	Route::resource('/client', 'EnterpriseApiController');
-	Route::resource('/item', 'ItemAuditApiController');
 });
+
+
+Route::resource('auditor', 'API\AuditorController');
+Route::resource('enterprise', 'API\EnterpriseController');

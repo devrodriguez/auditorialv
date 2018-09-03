@@ -1,12 +1,13 @@
 <?php
 
-namespace Auditoria\Http\Controllers;
+namespace Auditoria\Http\Controllers\API;
 
 use Illuminate\Http\Request;
+use Auditoria\Http\Controllers\Controller;
 
-use Auditoria\Criteria;
+use Auditoria\Auditor;
 
-class ItemAuditApiController extends Controller
+class AuditorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,18 +16,8 @@ class ItemAuditApiController extends Controller
      */
     public function index()
     {
-        $item = Criteria::all();
-        return json_decode($item);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $auditors = Auditor::all();
+        return json_decode($auditors);
     }
 
     /**
@@ -47,17 +38,6 @@ class ItemAuditApiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
     {
         //
     }

@@ -1,12 +1,13 @@
 <?php
 
-namespace Auditoria\Http\Controllers;
+namespace Auditoria\Http\Controllers\API;
 
 use Illuminate\Http\Request;
+use Auditoria\Http\Controllers\Controller;
 
-use Auditoria\Criteria;
+use Auditoria\Enterprise;
 
-class ItemAuditApiController extends Controller
+class EnterpriseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,18 +16,8 @@ class ItemAuditApiController extends Controller
      */
     public function index()
     {
-        $item = Criteria::all();
-        return json_decode($item);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $enterprises = Enterprise::all();
+        return json_decode($enterprises);
     }
 
     /**
@@ -46,20 +37,10 @@ class ItemAuditApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Enterprise $enterprise)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        //$enterprise = Enterprise::find([$id]);
+        return dd($enterprise);
     }
 
     /**
